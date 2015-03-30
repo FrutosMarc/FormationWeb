@@ -37,11 +37,22 @@
                 <th>Enabled</th>
                 <td>{{ entity.enabled }}</td>
             </tr>
+            <tr>
+                <th>Enabled</th>
+                <td>{{ entity.enabled }}</td>
+            </tr>
+            <tr>
+                <th>Auteur de l'article</th>
+                <td><a href="{{ path('user_show',{'id' : entity.author.id})}}">
+                    {{ entity.author.name}}
+                </a>    
+</td>
+            </tr>
+            
+            
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
+        <ul class="record_actions"
         <a href="{{ path('article') }}">
             Back to the list
         </a>
