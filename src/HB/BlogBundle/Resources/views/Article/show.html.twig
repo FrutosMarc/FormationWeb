@@ -1,8 +1,7 @@
-{% extends '::base.html.twig' %}
+{% extends 'HBBlogBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Article</h1>
-
+{% block Content -%}
+    <h2> Visualisation d'un article</h2>
     <table class="record_properties">
         <tbody>
             <tr>
@@ -64,4 +63,5 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+
 {% endblock %}

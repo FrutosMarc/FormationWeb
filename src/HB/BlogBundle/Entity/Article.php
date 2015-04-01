@@ -3,7 +3,8 @@
 namespace HB\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
 /**
  * Article
  *
@@ -25,6 +26,13 @@ class Article
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = "10",
+     *      max = "50",
+     *      minMessage = "Votre nom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      */
     private $title;
 
@@ -32,6 +40,11 @@ class Article
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank()
+     * @Assert\length(     
+     *      min = "10",
+     *      minMessage = "Votre Texte doit faire au moins {{ limit }} caractères"
+     * )
      */
     private $content;
 
@@ -39,6 +52,7 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")
+     * @Assert\DateTime()
      */
     private $creationDate;
 
@@ -46,6 +60,7 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(name="lastEditDate", type="datetime", nullable=True )
+     * @Assert\DateTime()
      */
     private $lastEditDate;
 
@@ -73,13 +88,15 @@ class Article
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
+     * 
      */
     private $author;
     
     public function __construct() {
         // Valeur par défaut (notamment pour le formulaire)
         $this->creationDate = new \DateTime();
-        $this->publishDate = new \DateTime();
+        $this->publishDate= new \DateTime();
+        $this->publishDate->modify('-1 years');
         $this->enabled = true;
     }
     /**
@@ -275,4 +292,28 @@ class Article
     {
         return $this->author;
     }
+    /**
+     * 
+     * @param ExecutionContextInterface $context
+     * @Assert\Callback
+     */
+   public function validatePublishDate(ExecutionContextInterface $context)
+    {
+       if($this->lastEditDate==null){
+          // $this->lastEditDate-> date();
+       }
+          $Diff= $this->publishDate->diff($this->lastEditDate);
+          // Vérifie si la date de publication est bien après la date de
+           if ($Diff->invert==0){
+               $context->addViolationAt(
+                   'publishDate',
+                   'La date de publication ne peut être avant la date de dernière édition !',
+                   array(),
+                   null
+               );
+           }
+         
+       
+           
+    }   
 }

@@ -2,16 +2,27 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Bienvenue!{% endblock %}</title>
         {% block stylesheets %}
-        
-        {% endblock %}
+         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link href="{{asset('/css/bootstrap.css')}}" rel="stylesheet" />
     </head>
+    <style>
+        body{
+            padding-top: 75px;
+            padding-left: 150px;
+            padding-right: 30px;
+        } 
+    </style>
     <body>
-        
+        {% block menu %}
+            {% include ':blocs:menu.html.twig' %}
+        {% endblock %}
         {% block body %}
         {% endblock %}
         {% block javascripts %}{% endblock %}
+        <script src="http:/>/code.jquery.com/jquery.js"></script>
+        <script src="{{ asset("js/bootstrap.min.js")}}"></script>
     </body>
 </html>

@@ -17,8 +17,14 @@ class UserType extends AbstractType
         $builder
             ->add('name')
             ->add('login')
-            ->add('password')
-            ->add('birthDate')
+            ->add('password','repeated',array(
+                'type' => 'password',
+                'invalid_message' => 'les deux mots de passe doit être identique.',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+                'first_options'  => array('label' => 'Mot de passe'),
+                'second_options' => array('label' => 'Mot de passe (confirmation)')))
+            ->add('birthDate','datetime',  array('years'=>range(date('Y')-50,date('Y'))))
             ->add('creationDate')
             ->add('lastEditDate')
             ->add('enabled')
