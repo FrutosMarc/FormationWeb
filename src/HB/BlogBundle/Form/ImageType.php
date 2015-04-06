@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ArticleType extends AbstractType
+class ImageType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,14 +15,9 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('content')
-            ->add('author','entity',array('class'=> 'HBBlogBundle:User','property'=> 'name'))
-            ->add('publishDate','datetime')
-            ->add('published','checkbox',array('required' => false))
-            ->add('enabled','checkbox',array('required' => false))
-            ->add('banner',new ImageType())
-        ;
+            ->add('title','text')
+            ->add('alt','text')
+            ->add('url','file',array("data_class"=>Null));
     }
     
     /**
@@ -31,7 +26,7 @@ class ArticleType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'HB\BlogBundle\Entity\Article'
+            'data_class' => 'HB\BlogBundle\Entity\Image'
         ));
     }
 
@@ -40,6 +35,6 @@ class ArticleType extends AbstractType
      */
     public function getName()
     {
-        return 'hb_blogbundle_article';
+        return 'hb_blogbundle_image';
     }
 }

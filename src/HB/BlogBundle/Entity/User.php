@@ -3,14 +3,14 @@
 namespace HB\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="HB\BlogBundle\Entity\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var integer
@@ -59,7 +59,7 @@ class User
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastEditDate", type="datetime")
+     * @ORM\Column(name="lastEditDate", type="datetime", nullable = true)
      */
     private $lastEditDate;
 
@@ -160,7 +160,7 @@ class User
      * Set birthdate
      *
      * @param \DateTime $birthDate
-     * @return User
+     * @return Class User
      */
     public function setBirthDate($birthdate)
     {
@@ -290,4 +290,23 @@ class User
     {
         return $this->articles;
     }
+
+    public function eraseCredentials() {
+        // Supprime les informations de connexion
+
+    }
+
+    public function getRoles() {
+        // Récupèration du role de l'utilisateur en cours
+        return array("ROLE_USER"); 
+    }
+
+    public function getSalt() {
+        return "";
+    }
+
+    public function getUsername() {
+       return $this->login;
+     }
+
 }

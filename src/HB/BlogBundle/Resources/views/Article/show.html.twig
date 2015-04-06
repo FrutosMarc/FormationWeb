@@ -40,13 +40,14 @@
                 <th>Enabled</th>
                 <td>{{ entity.enabled }}</td>
             </tr>
-            <tr>
+            {% if entity.author.id is defined %}<tr>
                 <th>Auteur de l'article</th>
                 <td><a href="{{ path('user_show',{'id' : entity.author.id})}}">
                     {{ entity.author.name}}
                 </a>    
 </td>
             </tr>
+            {% endif %}
             
             
         </tbody>

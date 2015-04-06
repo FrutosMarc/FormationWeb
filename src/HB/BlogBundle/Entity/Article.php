@@ -92,6 +92,13 @@ class Article
      */
     private $author;
     
+    /**
+     *
+     * @var Image
+     * @ORM\OneToOne(targetEntity="Image",cascade="persist")
+     */
+    private $banner;
+    
     public function __construct() {
         // Valeur par défaut (notamment pour le formulaire)
         $this->creationDate = new \DateTime();
@@ -300,7 +307,7 @@ class Article
    public function validatePublishDate(ExecutionContextInterface $context)
     {
        if($this->lastEditDate==null){
-          // $this->lastEditDate-> date();
+           return ;
        }
           $Diff= $this->publishDate->diff($this->lastEditDate);
           // Vérifie si la date de publication est bien après la date de
@@ -316,4 +323,27 @@ class Article
        
            
     }   
+
+    /**
+     * Set banner
+     *
+     * @param \HB\BlogBundle\Entity\Image $banner
+     * @return Article
+     */
+    public function setBanner(\HB\BlogBundle\Entity\Image $banner = null)
+    {
+        $this->banner = $banner;
+
+        return $this;
+    }
+
+    /**
+     * Get banner
+     *
+     * @return \HB\BlogBundle\Entity\Image 
+     */
+    public function getBanner()
+    {
+        return $this->banner;
+    }
 }

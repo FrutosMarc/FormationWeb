@@ -50,6 +50,7 @@ class ArticleController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->getBanner()->upload();
             $em->persist($entity);
             $em->flush();
 
@@ -193,6 +194,7 @@ class ArticleController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity->getBanner()->upload();
             $em->flush();
 
             return $this->redirect($this->generateUrl('article_edit', array('id' => $id)));

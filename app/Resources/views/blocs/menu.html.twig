@@ -7,11 +7,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="{{ path("article")}}">Symfony</a>
+          <a class="brand" href="{{ path("hb_blog_default_index")}}">Symfony</a>
           <div class="nav-collapse collapse"> 
             <ul class="nav">
               <li class="active">
-                <a href="{{ path("article")}}">Home</a>
+                <a href="{{ path("hb_blog_default_index")}}">Home</a>
               </li>
               <li class="">
                 <a href="{{ path("article")}}">Liste des article</a>
@@ -20,18 +20,9 @@
                 <a href="{{ path("user") }}">Liste des utilisateurs</a>
               </li>
               <li class="">
-                <a href="./base-css.html">Base CSS</a>
+                {{ render(controller("HBBlogBundle:Login:login")) }}
               </li> 
-              <li class="">
-                <a href="./components.html">Components</a>
-              </li>
-              <li class="">
-                <a href="./javascript.html">JavaScript</a>
-              </li>
-              <li class="">
-                <a href="./customize.html">Customize</a>
-              </li>
-            </ul>
+         </ul>
           </div>
         </div>
       </div>
