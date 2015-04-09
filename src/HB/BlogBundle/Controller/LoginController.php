@@ -43,7 +43,7 @@ class LoginController extends Controller
        }
        else
        {
-           return $this->render("HBBlogBundle:Logout:logout.html.twig",array("user"=>$user)) ;
+           return $this->render("HBBlogBundle:Login:logout.html.twig",array("user"=>$user)) ;
        }
     }
    /**

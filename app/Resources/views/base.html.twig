@@ -16,15 +16,19 @@
         } 
     </style>
     <body>
+        <div>
         {% block menu %}
             {% include ':blocs:menu.html.twig' %}
         {% endblock %}
+        </div>
+        <div>
         {% block body %}
         {% endblock %}
+        </div>
         {% block javascripts %}{% endblock %}
         <script src="http:/>/code.jquery.com/jquery.js"></script>
         <script src="{{ asset("js/bootstrap.min.js")}}"></script>
         
-        {{ dump(app.user) }}
+{#        {{ dump(app.user) }}#}
     </body>
 </html>

@@ -1,0 +1,37 @@
+{% extends "HBBlogBundle::layout.html.twig" %}
+
+{% block title %}HBBlogBundle:Blog:index{% endblock %}
+
+{% block Content %}
+     <h2>Welcome to the Blog:index page</h2>
+     {% for entity in entities %}
+         <article class="article">
+             <h3>{{entity.title}}</h3>
+             <p class="article_info">ajouté {{ entity.creationDate|date('d/m/Y') }} par {{entity.author.name}}</p>
+             <p class="article_extrait">
+                    {% if entity.content| length>10 %}
+                        {{entity.content|slice(0,10)~'...'}}
+                        <a href="">Lire la suite</a>
+                    {% else %}
+                        {{entity.content}}
+                    {% endif %}
+             </p>
+             
+         </article>
+     {% endfor%}
+     <nav id="pagination">
+         {%if lienPagePrecedente is not null %}
+            <a href ="{{lienPagePrecedente}}"><< précédente</a>
+         {% endif %}
+         {%if (lienPagePrecedente is not null or lienPageSuivante is not null) %}
+             --- page {{page+1}}---
+         {%else%}
+             {%if countPages == 0 %}
+                --- no article --- 
+             {%endif %}
+         {%endif %}
+         {% if lienPageSuivante is not null %} 
+            <a href ="{{lienPageSuivante}}">suivante >></a>
+         {% endif %} 
+     </nav>
+{% endblock %}

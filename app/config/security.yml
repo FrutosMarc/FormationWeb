@@ -40,9 +40,7 @@ security:
             # it's important to notice that in this case _demo_security_check and _demo_login
             # are route names and that they are specified in the AcmeDemoBundle
             form_login: ~ 
-            logout:
-                path: Logout
-                target: /home
+            logout: ~
             anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
