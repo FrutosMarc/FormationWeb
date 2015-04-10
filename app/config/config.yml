@@ -73,7 +73,7 @@ swiftmailer:
     spool:     { type: memory }
     
 knp_paginator:
-    page_range: 5                      # default page range used in pagination control
+    page_range: 10                      # default page range used in pagination control
     default_options:
         page_name: page                # page query parameter name
         sort_field_name: sort          # sort field query parameter name
@@ -82,3 +82,13 @@ knp_paginator:
     template:
         pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+        
+        # app/config/config.yml
+knp_menu:
+    # use "twig: false" to disable the Twig extension and the TwigRenderer
+    twig:
+        template: knp_menu.html.twig
+    #  if true, enables the helper for PHP templates
+    templating: false
+    # the renderer to use, list is also available by default
+    default_renderer: twig

@@ -8,8 +8,10 @@
             <span class="icon-bar"></span>
           </button>
           <a class="brand" href="{{ path("blog_index")}}">Symfony</a>
-          <div class="nav-collapse collapse"> 
-            <ul class="nav">
+          <div class="nav-collapse collapse">
+                {{ knp_menu_render('HBBlogBundle:Builder:mainMenu') }}
+              
+{#            <ul class="nav">
               <li class="active">
                 <a href="{{ path("blog_index")}}">Home</a>
               </li>
@@ -22,8 +24,8 @@
               <li class="">
                 {{ render(controller("HBBlogBundle:Login:login")) }}
               </li> 
-         </ul>
-          </div>
+            </ul>
+#}          </div>
         </div>
       </div>
     </div>

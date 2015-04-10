@@ -17,28 +17,17 @@ class BlogController extends Controller
     {
          $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('HBBlogBundle:Article')
-                    ->getHomePageArticles($page);
-        if ($page>0)
-            $lienPagePrecedente = $this->generateUrl('blog_index_page',array("page"=>$page - 1 ));
-        else
-            $lienPagePrecedente = NULL;
-        
-        
-        $pageTotal = $em->getRepository('HBBlogBundle:Article')
-                        ->getHomePageCountArticles();
-         if ($page +1< $pageTotal )
-            $lienPageSuivante = $this->generateUrl('blog_index_page',array("page"=>$page + 1 ));
-         else
-             $lienPageSuivante = NULL;
-         
-        
+                    ->getHomePageArticles();
+        // Gestion des pages
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $entities,
+            $page/*page number*/,
+            5/*limit per page*/
+        );
+        $pagination->setUsedRoute("blog_index_page");
         return array(
-            'entities' => $entities,
-            'lienPageSuivante' => $lienPageSuivante,
-            'lienPagePrecedente' => $lienPagePrecedente,
-            'page'=> $page,
-            'countPages'=>$pageTotal,
-            
+            'pagination' => $pagination
         );
     }
     /**

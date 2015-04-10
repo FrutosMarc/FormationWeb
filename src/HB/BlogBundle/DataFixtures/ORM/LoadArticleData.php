@@ -27,22 +27,16 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)    {
        
         $user1 = $this->getReference("user1"); 
+        for ($i=1;$i<50;$i++)
+        {
+            $article = new Article();
+            $article->setTitle('un article test '.$i);
+            $article->setContent('test test test avec le data fixtures.');
+            $article->setPublished(True);
+            $article->setAuthor($user1);
+            $manager->persist($article);
 
-        $article1 = new Article();
-        $article1->setTitle('un article test 1');
-        $article1->setContent('test test test avec le data fixtures.');
-        $article1->setPublished(True);
-        $article1->setAuthor($user1);
-        $manager->persist($article1);
-        
-        $user2 = $this->getReference("user2");        
-        $article2 = new Article();
-        $article2->setTitle('un article test 2');
-        $article2->setContent('test2 test2 test2 avec le data fixtures.');
-        $article2->setPublished(True);
-        $article2->setAuthor($user2);
-        $manager->persist($article2); 
-        
+         }
         $manager->flush();
 
     }
