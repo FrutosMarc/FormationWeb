@@ -48,5 +48,9 @@ class Builder extends ContainerAware{
                 'routeParameters' => array('id' => $article->getId())
             ));
         }
+            $menu['Derniers articles']->addChild("Test", array(
+                'route' => 'article_show',
+                'routeParameters' => array('id' => 0)
+            ));
         return $menu;
     }}

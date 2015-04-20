@@ -36,23 +36,37 @@
          {% endif %} 
      </nav>#}
 {# total items count #}
-<div class="count">
-    {{ pagination.getTotalItemCount }}
-</div>
 <table>
-<tr>
-{# sorting of properties based on query components #}
-    <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
-    <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}</th>
-</tr>
 
 {# table body #}
-{% for article in pagination %}
-<tr {% if loop.index is odd %}class="color"{% endif %}>
-    <td>{{ article.id }}</td>
-    <td>{{ article.title }}</td>
-</tr>
-{% endfor %}
+{% if pagination.getTotalItemCount>0 %}
+    <tr>
+   {# sorting of properties based on query components #}
+       <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+       <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}</th>
+   </tr>
+   {% for article in pagination %}
+    <tr width="100%"  class="LigneArticle">
+        <td >{{ article.id }}</td>
+        <td>{{ article.title }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('blog_article_slug', { slug: article.slug }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('article_edit', { id: article.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+        
+    </tr>
+    
+    {% endfor %}
+{% else %}
+    Aucun article
+{% endif %}
+    
 </table>
 {# display navigation #}
 <div class="navigation">

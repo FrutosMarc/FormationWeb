@@ -87,7 +87,7 @@ class Article
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
+     * ORM\ManyToOne(targetEntity="HB\UserBundle\Entity\User")
      * 
      */
     private $author;
@@ -95,9 +95,15 @@ class Article
     /**
      *
      * @var Image
-     * @ORM\OneToOne(targetEntity="Image",cascade="persist")
+     * ORM\OneToOne(targetEntity="Image",cascade="persist")
      */
     private $banner;
+   
+    /**
+     * @var string
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     */
+    private $slug;
     
     public function __construct() {
         // Valeur par défaut (notamment pour le formulaire)
@@ -283,7 +289,7 @@ class Article
      * @param \HB\BlogBundle\Entity\User $author
      * @return Article
      */
-    public function setAuthor(\HB\BlogBundle\Entity\User $author = null)
+    public function setAuthor(\HB\UserBundle\Entity\User $author = null)
     {
         $this->author = $author;
 
@@ -345,5 +351,28 @@ class Article
     public function getBanner()
     {
         return $this->banner;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Article
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

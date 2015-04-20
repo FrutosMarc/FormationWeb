@@ -25,9 +25,11 @@
         {% block body %}
         {% endblock %}
         </div>
-        {% block javascripts %}{% endblock %}
         <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script src="{{ asset("js/bootstrap.min.js")}}"></script>
+        {% block javascripts %}{% endblock %}
+        
         
 {#        {{ dump(app.user) }}#}
     </body>

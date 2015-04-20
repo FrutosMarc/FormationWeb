@@ -1,0 +1,69 @@
+{% extends 'HBBlogBundle::layout.html.twig' %}
+{% block title %}HBBlogBundle:Blog:show{% endblock %}
+
+{% block Content -%}
+    <h2> Visualisation d'un article</h2>
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ article.title }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ article.content }}</td>
+            </tr>
+            <tr>
+                <th>Creationdate</th>
+                <td>{{ article.creationDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Lasteditdate</th>
+                <td>{{ article.lastEditDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Publishdate</th>
+                <td>{{ article.publishDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Published</th>
+                <td>{{ article.published }}</td>
+            </tr>
+            <tr>
+                <th>Enabled</th>
+                <td>{{ article.enabled }}</td>
+            </tr>
+            <tr>
+                <th>Enabled</th>
+                <td>{{ article.enabled }}</td>
+            </tr>
+            {% if article.author.id is defined %}<tr>
+                <th>Auteur de l'article</th>
+                <td><a href="{{ path('user_show',{'id' : article.author.id})}}">
+                    {{ article.author.name}}
+                </a>    
+</td>
+            </tr>
+            {% endif %}
+            
+            
+        </tbody>
+    </table>
+        <ul class="record_actions"
+        <a href="{{ path('article') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('article_edit', { 'id': article.id }) }}">
+            Edit
+        </a>
+    </li>
+{#    <li>{{ form(delete_form) }}</li>#}
+</ul>
+
+{% endblock %}

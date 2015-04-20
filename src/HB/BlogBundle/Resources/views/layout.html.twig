@@ -5,4 +5,26 @@
     {%block Content %}
     {%endblock%}
 {%endblock%} 
+{% block javascripts %}
+    {{ parent() }}
+{#  <script src ="{{asset('Bundles/hbblog/js/homepage.js'}}"></script>#}
+    <script>
+        $(function(){
+         $('.LigneArticle').hover(
+          function() {
+             // votre code ici sera executé au passage de la souris sur le lien   
+             $(this).animate({
+                 border:'10px solid #000',backgroundColor:'#CCC'},50).css('cursor','pointer');}
+          ,
+          function(){
+             // votre code ici sera executé au passage de la souris sur le lien   
+             $(this).animate({
+                 borderWidth:'1px',backgroundColor:'#FFF'},50).css('cursor','default');
+             });
+              
+          }
+                
+        );                 
+    </script>
+{% endblock %}  
 

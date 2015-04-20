@@ -17,11 +17,12 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('author','entity',array('class'=> 'HBBlogBundle:User','property'=> 'name'))
+            ->add('author','entity',array('class'=> 'HBUserBundle:user:userName'))
             ->add('publishDate','datetime')
             ->add('published','checkbox',array('required' => false))
             ->add('enabled','checkbox',array('required' => false))
             ->add('banner',new ImageType())
+            ->add('slug','hidden',array("required"=>false))
         ;
     }
     

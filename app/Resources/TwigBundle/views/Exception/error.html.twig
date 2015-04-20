@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Une erreur est survenue : {{ status_text }}</title>
+</head>
+    <body>
+        <h1>Oups! Une erreur est survenue</h1>
+        <h2>Le serveur a retourné une erreur "{{ status_code }} {{ status_text }}".</h2>
+        <div>
+            <img src="{{ asset("bundles/hbblog/images/Error.png") }}">
+            <h3>Quelque chose ne fonctionne pas . S'il vous plait laissez nous connaitre ce qui s'est passé pour vous.
+            Nous le résoudrons dès que possible. Désolé pour les désagréments.</h3>
+        </div>
+    </body>
+</html>

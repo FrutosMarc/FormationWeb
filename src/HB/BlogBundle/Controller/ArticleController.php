@@ -46,8 +46,18 @@ class ArticleController extends Controller
     {
         $entity = new Article();
         $form = $this->createCreateForm($entity);
+        //permet de 'bind' la request à notre formulaire, 
+        //de vérifier les données saisies, et de remplir 
+        //notre objet article $entity
         $form->handleRequest($request);
-
+        // Injection du service
+        if ($entity->getSlug()== "")
+        {
+            $slugger= $this->get('hb_blog.slugger');
+            $slug = $slugger->getSlug((int) $entity->getId().' '. $entity->getTitle());
+            $entity->setSlug($slug);
+                
+        }
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->getBanner()->upload();
@@ -107,17 +117,9 @@ class ArticleController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction(Article $article)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('HBBlogBundle:Article')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($article->id);
 
         return array(
             'entity'      => $entity,
@@ -132,21 +134,13 @@ class ArticleController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
+    public function editAction(Article $article)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('HBBlogBundle:Article')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($article);
+        $deleteForm = $this->createDeleteForm($article->getId());
 
         return array(
-            'entity'      => $entity,
+            'entity'      => $article,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
